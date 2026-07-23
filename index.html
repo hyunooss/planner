@@ -32,6 +32,25 @@
                 목표를 한 글자 이상 입력해 주세요.</p>
         </section>
 
+        <section class="panel" aria-labelledby="list-title">
+            <div class="panel-head">
+                <h2 id="list-title" class="panel-title">학습 목록</h2>
+                <div class="tabs" id="filter-tabs" role="group" aria-label="목록 필터">
+                    <button class="tab is-active" type="button" data-filter="all">전체</button>
+                    <button class="tab" type="button" data-filter="active">진행중</button>
+                    <button class="tab" type="button" data-filter="done">완료</button>
+                </div>
+            </div>
+        
+            <ul class="list"></ul>
+            <p class="list-empty" id="list-empty">아직 등록된 목표가 없습니다.</p>
+            <div class="progress">
+                <div class="progress-bar">
+                    <span class="progress-fill" id="progress-fill"></span>
+                </div>
+                <p class="progress-text" id="progress-text">전체 0개 중 0개 완료</p>
+            </div>
+        </section>
 
     <script src="js/app.js"></script>
 </body>
