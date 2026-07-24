@@ -2,6 +2,8 @@
 
 HTML, CSS, JavaScript 수업에서 만든 스터디 플래너에 마감일, 검색, 분류별 요약 기능을 추가한 최종 제출 과제
 
+Github : https://github.com/hyunooss/planner
+
 ## 1. 구현한 기능 목록
 
 - F1 목표 추가
