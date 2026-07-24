@@ -51,9 +51,7 @@ button {
     cursor: pointer;
 }
 
-/* ------------------------------
-   Header
------------------------------- */
+
 .header {
     position: sticky;
     top: 0;
@@ -118,9 +116,7 @@ button {
     white-space: nowrap;
 }
 
-/* ------------------------------
-   Main layout
------------------------------- */
+
 .container {
     width: min(100%, 760px);
     margin: 0 auto;
@@ -219,9 +215,7 @@ button {
     font-style: italic;
 }
 
-/* ------------------------------
-   Goal form
------------------------------- */
+
 .form {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 135px auto;
@@ -314,9 +308,7 @@ button {
     transform: translateY(0) scale(0.98);
 }
 
-/* ------------------------------
-   List heading and filter tabs
------------------------------- */
+
 .panel-head {
     display: flex;
     align-items: center;
@@ -363,9 +355,7 @@ button {
     color: var(--color-list);
 }
 
-/* ------------------------------
-   Goal list - Javascript generated content
------------------------------- */
+
 .list {
     margin: 0;
     padding: 0;
@@ -448,9 +438,7 @@ button {
     text-align: center;
 }
 
-/* ------------------------------
-   Progress
------------------------------- */
+
 .progress {
     margin-top: 19px;
 }
@@ -492,9 +480,7 @@ button {
     font-size: 12px;
 }
 
-/* ------------------------------
-   Today's tip
------------------------------- */
+
 .panel-tip {
     min-height: 128px;
     padding-left: 74px;
@@ -529,9 +515,7 @@ button {
     font-size: 14px;
 }
 
-/* ------------------------------
-   Footer and accessibility
------------------------------- */
+
 .footer {
     padding: 5px 20px 34px;
     color: #909098;
@@ -568,9 +552,7 @@ button {
     outline-offset: 2px;
 }
 
-/* ------------------------------
-   Motion
------------------------------- */
+
 @keyframes panel-in {
     to {
         opacity: 1;
@@ -605,9 +587,7 @@ button {
     }
 }
 
-/* ------------------------------
-   Responsive
------------------------------- */
+
 @media (max-width: 620px) {
     .header {
         min-height: auto;
@@ -685,12 +665,7 @@ button {
     }
 }
 
-/* ==================================================
-   PDF 65~85p - Flexbox / Grid 레이아웃 재정리
-   기존 다이내믹 디자인은 유지하고 교재의 배치 규칙을 적용
-================================================== */
 
-/* Header: Flex의 space-between으로 로고와 날짜를 양 끝에 */
 .header {
     display: flex;
     justify-content: space-between;
@@ -698,7 +673,6 @@ button {
     gap: var(--space);
 }
 
-/* Container: 패널을 20px 간격의 1열 Grid로 관리 */
 .container {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -710,7 +684,6 @@ button {
     margin-bottom: 0;
 }
 
-/* Form: Grid 대신 교재의 flex-wrap + flex-basis 적용 */
 .form {
     display: flex;
     flex-wrap: wrap;
@@ -733,7 +706,7 @@ button {
     flex: none;
 }
 
-/* Panel head와 tabs: 한 방향 정렬은 Flexbox */
+
 .panel-head {
     display: flex;
     justify-content: space-between;
@@ -747,7 +720,6 @@ button {
     gap: 4px;
 }
 
-/* Item: 텍스트만 남은 공간을 차지하도록 구성 */
 .item {
     display: flex;
     align-items: center;
@@ -765,8 +737,7 @@ button {
     flex: 1;
     overflow-wrap: anywhere;
 }
-/* 
-/* 기존 모바일 디자인과 새 Flex 폼 규칙 연결 */
+
 @media (max-width: 620px) {
     .header {
         flex-direction: column;
@@ -775,12 +746,10 @@ button {
 
     .form-input,
     .form-select,
-    .btn-primary {
-        width: 100%;
+    .btn {
         flex: 1 1 100%;
     }
-
-    .panel-head {
-        align-items: flex-start;
+    .panel {
+        padding: 16px;
     }
-} */
+} 
