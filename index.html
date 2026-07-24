@@ -1,67 +1,174 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKALA 스터디 플래너</title>
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <header class="header">
         <h1 class="logo">SKALA 스터디 플래너</h1>
-        <p class="today" id="today">2026년 7월 23일</p>
+
+        <div class="header-actions">
+            <p class="today" id="today">오늘 날짜</p>
+
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">
+                <span class="theme-icon" aria-hidden="true">◐</span>
+                <span id="theme-text">다크 모드</span>
+            </button>
+        </div>
     </header>
 
     <main class="container">
-        <section class="panel" aria-labelledby="form-title">
+        <section class="panel panel-form" aria-labelledby="form-title">
             <h2 id="form-title" class="panel-title">학습 목표 추가</h2>
-            <form class="form" id="goal-form">
-                <label class="sr-only" for="goal-input">학습 목표</label>
-                <input class="form-input" id="goal-input" type="text" 
-                        placeholder="오늘 공부할 내용을 입력하세요" required>
-                <label class="sr-only" for="goal-category">분류</label>
-                <select class="form-select" id="goal-category">
-                    <option value="HTML">HTML</option>
-                    <option value="CSS">CSS</option>
-                    <option value="JS">Javascript</option>
-                </select>
-                <button class="btn btn-primary" type="submit">추가</button>
-            </form> 
-            <p class="form-error" id="form-error" hidden>
-                목표를 한 글자 이상 입력해 주세요.</p>
+
+            <form class="form" id="goal-form" novalidate>
+                <div class="field field-title">
+                    <label class="sr-only" for="goal-input">
+                        학습 목표
+                    </label>
+                    <input class="form-input" id="goal-input" type="text" placeholder="오늘 공부할 내용을 입력하세요"
+                        autocomplete="off" required>
+                </div>
+
+                <div class="field">
+                    <label class="sr-only" for="goal-category">
+                        분류
+                    </label>
+                    <select class="form-select" id="goal-category">
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="JS">JavaScript</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label class="sr-only" for="goal-due">
+                        마감일
+                    </label>
+                    <input class="form-input form-date" id="goal-due" type="date">
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    추가
+                </button>
+            </form>
+
+            <p class="form-error" id="form-error" role="alert" hidden>
+                목표를 한 글자 이상 입력해 주세요.
+            </p>
         </section>
 
-        <section class="panel" aria-labelledby="list-title">
+        <section class="panel panel-list" aria-labelledby="list-title">
+
             <div class="panel-head">
-                <h2 id="list-title" class="panel-title">학습 목록</h2>
+                <h2 id="list-title" class="panel-title">
+                    학습 목록
+                </h2>
+
                 <div class="tabs" id="filter-tabs" role="group" aria-label="목록 필터">
-                    <button class="tab is-active" type="button" data-filter="all">전체</button>
-                    <button class="tab" type="button" data-filter="active">진행중</button>
-                    <button class="tab" type="button" data-filter="done">완료</button>
+
+                    <button class="tab is-active" type="button" data-filter="all" aria-pressed="true">
+                        전체
+                    </button>
+
+                    <button class="tab" type="button" data-filter="active" aria-pressed="false">
+                        진행중
+                    </button>
+
+                    <button class="tab" type="button" data-filter="done" aria-pressed="false">
+                        완료
+                    </button>
                 </div>
             </div>
-        
+
+            <div class="list-controls">
+                <div class="list-tools">
+                    <div class="search-field">
+                        <label class="sr-only" for="goal-search">
+                            학습 목표 검색
+                        </label>
+
+                        <input class="search-input" id="goal-search" type="search" placeholder="목표 검색"
+                            autocomplete="off">
+                    </div>
+
+                    <div class="sort-controls" id="sort-controls" role="group" aria-label="목록 정렬">
+
+                        <span class="sort-label">정렬</span>
+
+                        <button class="sort-btn is-active" type="button" data-sort="due" aria-pressed="true">
+                            마감일 임박순
+                        </button>
+
+                        <button class="sort-btn" type="button" data-sort="latest" aria-pressed="false">
+                            최신순
+                        </button>
+                    </div>
+                </div>
+
+                <div class="summary" id="category-summary" aria-label="분류별 남은 목표" aria-live="polite">
+
+                    <span class="summary-label">남은 목표</span>
+
+                    <span class="summary-item summary-html">
+                        HTML <strong id="summary-html">0</strong>
+                    </span>
+
+                    <span class="summary-item summary-css">
+                        CSS <strong id="summary-css">0</strong>
+                    </span>
+
+                    <span class="summary-item summary-js">
+                        JS <strong id="summary-js">0</strong>
+                    </span>
+                </div>
+            </div>
+
             <ul class="list" id="goal-list"></ul>
-            <p class="list-empty" id="list-empty">아직 등록된 목표가 없습니다.</p>
+
+            <p class="list-empty" id="list-empty" aria-live="polite">
+                아직 등록된 목표가 없습니다.
+                예: CSS Grid 복습하기
+            </p>
+
+            <p class="sr-only" id="list-status" aria-live="polite"></p>
+
             <div class="progress">
-                <div class="progress-bar">
+                <div class="progress-bar" id="progress-bar" role="progressbar" aria-label="학습 목표 완료율" aria-valuemin="0"
+                    aria-valuemax="100" aria-valuenow="0">
+
                     <span class="progress-fill" id="progress-fill"></span>
                 </div>
-                <p class="progress-text" id="progress-text">전체 0개 중 0개 완료</p>
+
+                <p class="progress-text" id="progress-text" aria-live="polite">
+                    전체 0개 중 0개 완료 (0%)
+                </p>
             </div>
         </section>
 
-        <section class="panel panel-tip">
-            <h2 class="panel-title">오늘의 팁</h2>
-            <p class="tip" id="tip">불러오는 중…</p>
+        <section class="panel panel-tip" aria-labelledby="tip-title">
+
+            <h2 id="tip-title" class="panel-title">
+                오늘의 팁
+            </h2>
+
+            <p class="tip" id="tip" aria-live="polite">
+                불러오는 중…
+            </p>
         </section>
     </main>
-        
+
     <footer class="footer">
         <p>&copy; 2026 SKALA</p>
     </footer>
 
     <script src="js/app.js"></script>
 </body>
+
 </html>
