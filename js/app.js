@@ -201,7 +201,8 @@ form.addEventListener("submit", (event) => {
 });
 
 /* ==================================================
-   9. 목록 클릭 이벤트 위임 (각 항목이 아니라 부모 목록에 리스너를 하나만 둠)
+   9. 목록 클릭 이벤트 위임
+   각 항목이 아니라 부모 목록에 리스너를 하나만 둔다.
 ================================================== */
 listEl.addEventListener("click", (event) => {
     const item = event.target.closest(".item");
@@ -256,7 +257,34 @@ input.addEventListener("keydown", (event) => {
 });
 
 /* ==================================================
-   12. 날짜와 첫 화면 표시
+   12. 오늘의 팁 비동기로 불러오기
+================================================== */
+async function loadTip() {
+    tipEl.textContent = "불러오는 중…";
+
+    try {
+        const response = await fetch("data/tips.json");
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const tips = await response.json();
+
+        if (!Array.isArray(tips) || tips.length === 0) {
+            throw new Error("사용할 수 있는 팁이 없습니다.");
+        }
+
+        const today = new Date().getDate() % tips.length;
+        tipEl.textContent = tips[today];
+    } catch (error) {
+        tipEl.textContent = "팁을 불러오지 못했습니다.";
+        console.error("오늘의 팁 불러오기 실패:", error);
+    }
+}
+
+/* ==================================================
+   13. 첫 화면 표시
 ================================================== */
 todayEl.textContent = new Date().toLocaleDateString("ko-KR", {
     year: "numeric",
@@ -264,7 +292,5 @@ todayEl.textContent = new Date().toLocaleDateString("ko-KR", {
     day: "numeric",
 });
 
-tipEl.textContent =
-    "Flexbox는 1차원, Grid는 2차원 레이아웃에 적합합니다.";
-
 render();
+loadTip();
